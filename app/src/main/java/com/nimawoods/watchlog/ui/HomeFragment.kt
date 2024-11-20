@@ -3,6 +3,7 @@ package com.nimawoods.watchlog.ui
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nimawoods.watchlog.R
@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var btnFilme: Button
     private lateinit var btnSerien: Button
     private lateinit var watchlistAdapter: WatchlistAdapter
-    private var isFilmeSelected = true
+    private var isSerieSelected = true // Standardmäßig Serien ausgewählt
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +35,35 @@ class HomeFragment : Fragment() {
         btnFilme = view.findViewById(R.id.btn_filme)
         btnSerien = view.findViewById(R.id.btn_serien)
 
+        setupCalendarRecyclerView(view)
+        setupWatchlistRecyclerView(view)
+
+        // Initialisiere die Watchlist und Styles
+        updateWatchlist(getWatchlistItemsSerien())
+        updateButtonStyles()
+
+        // Filme-Button klickbar machen
+        btnFilme.setOnClickListener {
+            if (isSerieSelected) {
+                isSerieSelected = false
+                updateButtonStyles()
+                updateWatchlist(getWatchlistItemsFilme())
+            }
+        }
+
+        // Serien-Button klickbar machen
+        btnSerien.setOnClickListener {
+            if (!isSerieSelected) {
+                isSerieSelected = true
+                updateButtonStyles()
+                updateWatchlist(getWatchlistItemsSerien())
+            }
+        }
+
+        return view
+    }
+
+    private fun setupCalendarRecyclerView(view: View) {
         val calendarItems = listOf(
             CalendarItem("Mo", "23"),
             CalendarItem("Di", "24"),
@@ -44,66 +73,52 @@ class HomeFragment : Fragment() {
         )
 
         val calendarRecyclerView = view.findViewById<RecyclerView>(R.id.calendar_recycler)
-        val gridLayoutManager = GridLayoutManager(requireContext(), calendarItems.size)
-        calendarRecyclerView.layoutManager = gridLayoutManager
-        calendarRecyclerView.adapter = CalendarAdapter(calendarItems) { selectedItem ->
-            println("Selected: ${selectedItem.date}")
-        }
-
         calendarRecyclerView.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.HORIZONTAL,
             false
         )
-
-        // Abstand zwischen Items hinzufügen
-        calendarRecyclerView.addItemDecoration(HorizontalSpaceItemDecoration(requireContext()))
-
-        val watchlistRecycler: RecyclerView = view.findViewById(R.id.watchlist_recycler)
-        val watchlistItemsFilme = listOf(
-            WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true)
-        )
-        val watchlistItemsSerien = listOf(
-            WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true)
-        )
-
-        val watchlistRecyclerView = view.findViewById<RecyclerView>(R.id.watchlist_recycler)
-        watchlistAdapter = WatchlistAdapter(watchlistItemsSerien) { item ->
-            println("Clicked: ${item.title}")
+        calendarRecyclerView.adapter = CalendarAdapter(calendarItems) { selectedItem ->
+            Log.d("HomeFragment", "Selected: ${selectedItem.date}")
         }
+        calendarRecyclerView.addItemDecoration(HorizontalSpaceItemDecoration(requireContext()))
+    }
 
+    private fun setupWatchlistRecyclerView(view: View) {
+        val watchlistRecyclerView = view.findViewById<RecyclerView>(R.id.watchlist_recycler)
+        watchlistAdapter = WatchlistAdapter(emptyList()) { item ->
+            Log.d("HomeFragment", "Clicked: ${item.title}")
+        }
         watchlistRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         watchlistRecyclerView.adapter = watchlistAdapter
-
-        btnFilme.setOnClickListener {
-            if (!isFilmeSelected) {
-                isFilmeSelected = true
-                updateButtonStyles()
-                watchlistAdapter.updateList(watchlistItemsFilme)
-            }
-        }
-
-        btnSerien.setOnClickListener {
-            if (isFilmeSelected) {
-                isFilmeSelected = false
-                updateButtonStyles()
-                watchlistAdapter.updateList(watchlistItemsSerien)
-            }
-        }
-
-        return view
     }
 
     private fun updateButtonStyles() {
-        if (isFilmeSelected) {
+        if (!isSerieSelected) {
             btnFilme.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.purple))
             btnSerien.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.front))
         } else {
             btnSerien.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.purple))
             btnFilme.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.front))
         }
+    }
+
+    private fun updateWatchlist(newItems: List<WatchlistItem>) {
+        watchlistAdapter.updateList(newItems)
+    }
+
+    private fun getWatchlistItemsFilme(): List<WatchlistItem> {
+        return listOf(
+            WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
+            WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true)
+        )
+    }
+
+    private fun getWatchlistItemsSerien(): List<WatchlistItem> {
+        return listOf(
+            WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
+            WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true)
+        )
     }
 
     private class HorizontalSpaceItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
@@ -116,3 +131,4 @@ class HomeFragment : Fragment() {
         }
     }
 }
+
