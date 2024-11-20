@@ -3,25 +3,26 @@
     <!-- Grundfarben -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="front">#FFFFFF</color>
+    <color name="back">#F5F5F5</color>
+
+    <!-- Icons -->
+    <color name="icon">@color/black</color>
+
+    <!-- Text -->
+    <color name="text_front">@color/black</color>
 
     <!-- Lila Töne -->
-    <color name="purple_lightest">#F3E5F5</color> <!-- Sehr helles Lila -->
-    <color name="purple_lighter">#CE93D8</color> <!-- Helles Lila -->
-    <color name="purple_light">#AB47BC</color> <!-- Etwas helles Lila -->
-    <color name="purple">#9C27B0</color> <!-- Standard Lila -->
-    <color name="purple_dark">#7B1FA2</color> <!-- Dunkles Lila -->
-    <color name="purple_darker">#4A148C</color> <!-- Sehr dunkles Lila -->
-
-    <!-- Lila Töne mit Blau -->
-    <color name="purple_blue_light">#B39DDB</color> <!-- Flieder -->
-    <color name="purple_blue">#7C4DFF</color> <!-- Lila mit Blaustich -->
-
-    <!-- Lila Töne mit Rot -->
-    <color name="purple_red_light">#E1BEE7</color> <!-- Rosa-Lila -->
-    <color name="purple_red">#D500F9</color> <!-- Intensives Magenta -->
+    <color name="purple_lightest">#F3E5F5</color>
+    <color name="purple_lighter">#E1BEE7</color>
+    <color name="purple_light">#AB47BC</color>
+    <color name="purple">#9C27B0</color>
+    <color name="purple_dark">#7B1FA2</color>
+    <color name="purple_darker">#4A148C</color>
 
     <!-- Akzentfarben -->
-    <color name="purple_accent_light">#EA80FC</color> <!-- Heller Akzent -->
-    <color name="purple_accent">#E040FB</color> <!-- Standard Akzent -->
-    <color name="purple_accent_dark">#AA00FF</color> <!-- Dunkler Akzent -->
+    <color name="purple_accent_light">#EA80FC</color>
+    <color name="purple_accent">#E040FB</color>
+    <color name="purple_accent_dark">#AA00FF</color>
 </resources>
+

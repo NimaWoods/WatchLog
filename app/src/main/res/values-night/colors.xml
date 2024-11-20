@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Grundfarben -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="front">#292731</color>
+    <color name="back">#1b1a1f</color>
+
+    <!-- Icons -->
+    <color name="icon">@color/white</color>
+    <color name="text_front">@color/white</color>
+
+    <!-- Lila Töne -->
+    <color name="purple_lightest">#CE93D8</color>
+    <color name="purple_lighter">#AB47BC</color>
+    <color name="purple_light">#9C27B0</color>
+    <color name="purple">#7B1FA2</color>
+    <color name="purple_dark">#4A148C</color>
+    <color name="purple_darker">#311B92</color>
+
+    <!-- Akzentfarben -->
+    <color name="purple_accent_light">#D500F9</color>
+    <color name="purple_accent">#AA00FF</color>
+    <color name="purple_accent_dark">#4A148C</color>
+</resources>

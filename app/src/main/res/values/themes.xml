@@ -1,8 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.WatchLog" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.WatchLog" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Farben für Light Theme -->
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimaryVariant">@color/purple_dark</item>
+        <item name="colorSecondary">@color/purple_accent</item>
+
+        <!-- Statusleiste und Navigationsleiste -->
+        <item name="android:statusBarColor">@color/purple_dark</item>
+        <item name="android:navigationBarColor">@color/front</item>
+
+        <!-- Textfarbe in der Statusleiste -->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.WatchLog" parent="Base.Theme.WatchLog" />

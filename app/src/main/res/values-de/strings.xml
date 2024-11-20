@@ -1,0 +1,8 @@
+<resources>
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Suche</string>
+    <string name="nav_tv">Beobachtungsliste</string>
+    <string name="nav_avatar">Profil</string>
+    <!-- Strings used for fragments for navigation -->
+
+</resources>

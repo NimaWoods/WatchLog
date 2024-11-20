@@ -1,7 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.WatchLog" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.WatchLog" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Farben für Dark Theme -->
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimaryVariant">@color/purple_darker</item>
+        <item name="colorSecondary">@color/purple_accent_dark</item>
+
+        <!-- Statusleiste und Navigationsleiste -->
+        <item name="android:statusBarColor">@color/front</item>
+        <item name="android:navigationBarColor">@color/back</item>
+
+        <!-- Textfarbe in der Statusleiste -->
+        <item name="android:windowLightStatusBar">false</item>
     </style>
+
+    <style name="Theme.WatchLog" parent="Base.Theme.WatchLog" />
 </resources>
