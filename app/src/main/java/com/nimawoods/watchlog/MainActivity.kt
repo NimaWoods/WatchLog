@@ -13,31 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // NavHostFragment und NavController initialisieren
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController: NavController = navHostFragment.navController
 
-        // BottomNavigationView mit NavController verknüpfen
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.homeFragment -> {
-                    println("HomeFragment selected")
-                }
-                R.id.searchFragment -> {
-                    println("SearchFragment selected")
-                }
-                R.id.watchlistFragment -> {
-                    println("WatchlistFragment selected")
-                }
-                R.id.profileFragment -> {
-                    println("ProfileFragment selected")
-                }
-            }
-            true
-        }
-
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }

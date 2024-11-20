@@ -6,6 +6,7 @@
     <string name="nav_avatar">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="sv_latest">Latest Movies and Shows</string>
+    <string name="watched_status">Watched</string>
     <!-- Strings used for fragments for navigation -->
 
 </resources>
