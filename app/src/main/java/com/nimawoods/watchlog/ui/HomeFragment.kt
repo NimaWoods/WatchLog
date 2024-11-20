@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var btnFilme: Button
     private lateinit var btnSerien: Button
     private lateinit var watchlistAdapter: WatchlistAdapter
-    private var isSerieSelected = true // Standardmäßig Serien ausgewählt
+    private var isSerieSelected = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +38,9 @@ class HomeFragment : Fragment() {
         setupCalendarRecyclerView(view)
         setupWatchlistRecyclerView(view)
 
-        // Initialisiere die Watchlist und Styles
         updateWatchlist(getWatchlistItemsSerien())
         updateButtonStyles()
 
-        // Filme-Button klickbar machen
         btnFilme.setOnClickListener {
             if (isSerieSelected) {
                 isSerieSelected = false
@@ -110,12 +108,20 @@ class HomeFragment : Fragment() {
     private fun getWatchlistItemsFilme(): List<WatchlistItem> {
         return listOf(
             WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
+            WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true),
+            WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
+            WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true),
+            WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
             WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true)
         )
     }
 
     private fun getWatchlistItemsSerien(): List<WatchlistItem> {
         return listOf(
+            WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
+            WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true),
+            WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
+            WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true),
             WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
             WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true)
         )

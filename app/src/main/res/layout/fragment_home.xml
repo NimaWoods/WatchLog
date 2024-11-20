@@ -51,22 +51,22 @@
         app:layout_constraintTop_toBottomOf="@id/button_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/calender_item" />
+        tools:listitem="@layout/item_calender" />
 
     <!-- "Weiter gucken"-Label -->
     <TextView
         android:id="@+id/weiter_gucken_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Weiter gucken:"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"
 
-        app:layout_constraintTop_toBottomOf="@id/calendar_recycler"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendar_recycler" />
 
     <!-- Watchlist RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -79,6 +79,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/watchlist_item" />
+        tools:listitem="@layout/item_watchlist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

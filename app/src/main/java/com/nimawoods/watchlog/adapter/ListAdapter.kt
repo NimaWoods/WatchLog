@@ -29,7 +29,7 @@ class ListAdapter(private var items: List<ListEntry>) :
         return when (viewType) {
             VIEW_TYPE_HEADER -> {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.header_item, parent, false)
+                    .inflate(R.layout.item_header, parent, false)
                 HeaderViewHolder(view)
             }
             VIEW_TYPE_ITEM -> {
