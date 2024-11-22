@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.nimawoods.watchlog.R
 import com.nimawoods.watchlog.models.WatchlistItem
 
@@ -30,16 +31,20 @@ class WatchlistAdapter(
     override fun onBindViewHolder(holder: WatchlistViewHolder, position: Int) {
         val item = items[position]
         holder.title.text = item.title
-        holder.episode.text = item.episode
+        holder.episode.text = item.seasondAndEpisodeString
         holder.description.text = item.description
-        holder.image.setImageResource(item.imageRes)
+
+        Glide.with(holder.itemView.context)
+            .load(item.imageURL)
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(holder.image)
 
         holder.itemView.setOnClickListener { onClick(item) }
     }
 
     override fun getItemCount() = items.size
 
-    // Methode zum Aktualisieren der Liste
     fun updateList(newItems: List<WatchlistItem>) {
         items = newItems
         notifyDataSetChanged()

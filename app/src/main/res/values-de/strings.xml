@@ -1,8 +1,13 @@
 <resources>
+    <string name="app_name">WatchLog</string>
     <string name="nav_home">Home</string>
     <string name="nav_search">Suche</string>
     <string name="nav_tv">Beobachtungsliste</string>
     <string name="nav_avatar">Profil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="sv_latest">Neueste Filme und Shows</string>
+    <string name="watched_status">Beobachtet</string>
+    <string name="hint_search">Suchen...</string>
     <!-- Strings used for fragments for navigation -->
 
 </resources>

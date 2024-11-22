@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="Base.Theme.WatchLog" parent="Theme.Material3.Light.NoActionBar">
         <!-- Farben für Light Theme -->
         <item name="colorPrimary">@color/purple</item>
@@ -11,7 +11,20 @@
 
         <!-- Textfarbe in der Statusleiste -->
         <item name="android:windowLightStatusBar">true</item>
+
+        <item name="colorControlNormal">@color/front</item>
+        <item name="android:editTextColor">@color/text_front</item>
+        <item name="android:textColorHint">@color/text_front</item>
+
     </style>
 
     <style name="Theme.WatchLog" parent="Base.Theme.WatchLog" />
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:queryHint">Search...</item>
+        <item name="android:textColor">@color/text_front</item>
+        <item name="android:textColorHint">@color/text_front</item>
+        <item name="android:background">@color/front</item>
+    </style>
+
 </resources>

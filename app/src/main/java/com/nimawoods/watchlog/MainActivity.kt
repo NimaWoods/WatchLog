@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.nimawoods.watchlog.api.APIHandler
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,5 +20,10 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
+
+        val apiHandler = APIHandler()
+        apiHandler.testConnection()
+        apiHandler.close()
+
     }
 }

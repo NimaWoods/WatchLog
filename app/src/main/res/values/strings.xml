@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">WatchLog</string>
+    <string name="app_name">WatchLog</string>
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
     <string name="nav_tv">Watchlist</string>
@@ -7,6 +7,25 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="sv_latest">Latest Movies and Shows</string>
     <string name="watched_status">Watched</string>
+    <string name="hint_search">Search...</string>
+    <string name="title_search_results">Search Results for: %1$s</string>
+    <string name="unknown_title">Unknown Title</string>
+    <string name="unknown_genre">Unknown Genre</string>
+    <string name="unknown_year">Unknown Year</string>
+    <string name="unknown_date">Unknown Date</string>
+    <string name="unknown_description">No description available</string>
+    <string name="unknown_rating">No Rating</string>
+    <string name="n_a">N/A</string>
+    <string name="default_cover_url">https://ih1.redbubble.net/image.1861329778.2941/st,small,845x845-pad,1000x1000,f8f8f8.jpg</string>
+
+    <string name="episode_season">Season</string>
+    <string name="episode_number">Episode</string>
+
+    <string name="movie_release_date">Release Date: %1$s</string>
+
+    <string name="error_parsing_series">Error parsing series list: %1$s</string>
+    <string name="error_parsing_movies">Error parsing movies: %1$s</string>
+
     <!-- Strings used for fragments for navigation -->
 
 </resources>

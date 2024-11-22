@@ -24,7 +24,7 @@
         android:id="@+id/searchFragment"
         android:name="com.nimawoods.watchlog.ui.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search_page" />
 
     <fragment
         android:id="@+id/watchlistFragment"

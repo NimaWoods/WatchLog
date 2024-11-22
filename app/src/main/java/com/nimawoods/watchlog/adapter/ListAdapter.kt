@@ -1,11 +1,10 @@
-package com.nimawoods.watchlog.adapter
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.nimawoods.watchlog.R
 import com.nimawoods.watchlog.models.ListEntry
 import com.nimawoods.watchlog.models.ListItem
@@ -55,7 +54,6 @@ class ListAdapter(private var items: List<ListEntry>) :
         notifyDataSetChanged()
     }
 
-    // Header ViewHolder
     class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val headerText: TextView = itemView.findViewById(R.id.header_text)
 
@@ -64,16 +62,20 @@ class ListAdapter(private var items: List<ListEntry>) :
         }
     }
 
-    // Item ViewHolder
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image: ImageView = itemView.findViewById(R.id.item_image)
         private val title: TextView = itemView.findViewById(R.id.item_title)
-        private val description: TextView = itemView.findViewById(R.id.item_description)
+        private val year: TextView = itemView.findViewById(R.id.item_year)
 
         fun bind(item: ListItem) {
-            image.setImageResource(item.imageRes)
+            Glide.with(itemView.context)
+                .load(item.imageUrl)
+                .placeholder(R.drawable.no_image_svgrepo_com)
+                .error(R.drawable.no_image_svgrepo_com)
+                .into(image)
+
             title.text = item.title
-            description.text = item.description
+            year.text = item.year
         }
     }
 }

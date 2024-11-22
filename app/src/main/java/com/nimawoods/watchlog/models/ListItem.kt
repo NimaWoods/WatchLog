@@ -1,7 +1,7 @@
 package com.nimawoods.watchlog.models
 
 data class ListItem(
-    val imageRes: Int,
+    val imageUrl: String,
     val title: String,
-    val description: String
+    val year: String
 )

@@ -1,5 +1,6 @@
 package com.nimawoods.watchlog.ui
 
+import SeriesMapper
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
@@ -11,13 +12,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nimawoods.watchlog.R
 import com.nimawoods.watchlog.adapter.CalendarAdapter
 import com.nimawoods.watchlog.adapter.WatchlistAdapter
+import com.nimawoods.watchlog.api.series.SeriesAPIHandler
 import com.nimawoods.watchlog.models.CalendarItem
 import com.nimawoods.watchlog.models.WatchlistItem
+import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 class HomeFragment : Fragment() {
 
@@ -38,7 +43,11 @@ class HomeFragment : Fragment() {
         setupCalendarRecyclerView(view)
         setupWatchlistRecyclerView(view)
 
-        updateWatchlist(getWatchlistItemsSerien())
+        lifecycleScope.launch {
+            val watchlistItems = getWatchlistItemsSerien()
+            updateWatchlist(watchlistItems)
+        }
+
         updateButtonStyles()
 
         btnFilme.setOnClickListener {
@@ -49,12 +58,15 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Serien-Button klickbar machen
         btnSerien.setOnClickListener {
             if (!isSerieSelected) {
                 isSerieSelected = true
                 updateButtonStyles()
-                updateWatchlist(getWatchlistItemsSerien())
+
+                lifecycleScope.launch {
+                    val watchlistItems = getWatchlistItemsSerien()
+                    updateWatchlist(watchlistItems)
+                }
             }
         }
 
@@ -107,24 +119,28 @@ class HomeFragment : Fragment() {
 
     private fun getWatchlistItemsFilme(): List<WatchlistItem> {
         return listOf(
-            WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true),
-            WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true),
-            WatchlistItem("Inception", "Movie", "Ein spannender Traum in einem Traum.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Titanic", "Movie", "Ein episches Liebesdrama auf hoher See.", R.drawable.ic_launcher_background, isWatched = true)
+
         )
     }
 
-    private fun getWatchlistItemsSerien(): List<WatchlistItem> {
-        return listOf(
-            WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true),
-            WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true),
-            WatchlistItem("Breaking Bad", "S05 | E14", "Die Entwicklung eines Lehrers zum Drogenboss.", R.drawable.ic_launcher_foreground, isWatched = false),
-            WatchlistItem("Stranger Things", "S04 | E01", "Ein mysteriöses Abenteuer in Hawkins.", R.drawable.ic_launcher_background, isWatched = true)
-        )
+    private suspend fun getWatchlistItemsSerien(): List<WatchlistItem> {
+        val seriesApiHandler = SeriesAPIHandler()
+        val seriesMapper = SeriesMapper()
+
+        val seriesNames = listOf("Breaking Bad", "Stranger Things")
+        val watchlistItems = mutableListOf<WatchlistItem>()
+
+        for (seriesName in seriesNames) {
+            try {
+                val responseJson = seriesApiHandler.fetchSeries(seriesName, 1, 1)
+                val seriesModel = seriesMapper.parseSeriesObject(JSONObject(responseJson))
+                watchlistItems.add(seriesModel.toWatchlistItem())
+            } catch (e: Exception) {
+                Log.e("getWatchlistItemsSerien", "Error fetching/parsing series for $seriesName", e)
+            }
+        }
+
+        return watchlistItems
     }
 
     private class HorizontalSpaceItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
