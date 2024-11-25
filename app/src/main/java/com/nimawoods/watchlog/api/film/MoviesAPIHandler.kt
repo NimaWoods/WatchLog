@@ -1,17 +1,19 @@
 package com.nimawoods.watchlog.api.movies
 
 import com.nimawoods.watchlog.api.APIService
+import com.nimawoods.watchlog.constants.AppConstants.Companion.API_BASE_URL
+import com.nimawoods.watchlog.constants.AppConstants.Companion.API_KEY
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class MoviesAPIHandler {
 
-    private val API_BASE_URL = "https://www.omdbapi.com/?apikey=1bdb0a7d&plot=short"
+    private val apiBaseURL = "$API_BASE_URL/?$API_KEY"
 
     suspend fun fetchMovie(title: String): String {
         return suspendCoroutine { continuation ->
-            val apiURLCall = "$API_BASE_URL&t=$title&type=movie"
+            val apiURLCall = "$apiBaseURL&t=$title&type=movie"
 
             APIService.fetch(
                 apiURLCall,
@@ -23,7 +25,7 @@ class MoviesAPIHandler {
 
     suspend fun searchMovies(query: String): String {
         return suspendCoroutine { continuation ->
-            val apiURL = "$API_BASE_URL&s=$query&type=movie"
+            val apiURL = "$apiBaseURL&s=$query&type=movie"
             APIService.fetch(
                 apiURL,
                 onSuccess = { response -> continuation.resume(response) },

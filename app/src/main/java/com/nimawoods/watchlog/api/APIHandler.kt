@@ -1,12 +1,15 @@
 package com.nimawoods.watchlog.api
 
+import com.nimawoods.watchlog.constants.AppConstants.Companion.API_BASE_URL
+import com.nimawoods.watchlog.constants.AppConstants.Companion.API_KEY
+
 class APIHandler : AutoCloseable {
 
-    private val API_BASE_URL = "https://www.omdbapi.com/?apikey=1bdb0a7d"
+    private val apiBaseURL = "$API_BASE_URL/?$API_KEY"
 
     fun testConnection() {
-        APIService.fetch("https://www.omdbapi.com/?apikey=1bdb0a7d&i=tt0910970"
-            , onSuccess = { response ->
+        APIService.fetch(apiBaseURL,
+            onSuccess = { response ->
                 println("API CONNECTED! Antwort: $response")
             }
             , onError = { error ->

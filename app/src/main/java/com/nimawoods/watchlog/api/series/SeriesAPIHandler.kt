@@ -1,13 +1,15 @@
 package com.nimawoods.watchlog.api.series
 
 import com.nimawoods.watchlog.api.APIService
+import com.nimawoods.watchlog.constants.AppConstants.Companion.API_BASE_URL
+import com.nimawoods.watchlog.constants.AppConstants.Companion.API_KEY
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class SeriesAPIHandler {
 
-    private val API_BASE_URL = "https://www.omdbapi.com/?apikey=1bdb0a7d"
+    private val apiBaseURL = "$API_BASE_URL/?$API_KEY"
 
     suspend fun fetchSeries(
         title: String,
@@ -16,7 +18,7 @@ class SeriesAPIHandler {
     ): String {
         return suspendCoroutine { continuation ->
             val apiURLCall = buildString {
-                append("$API_BASE_URL&t=$title")
+                append("$apiBaseURL&t=$title")
                 append("&type=series")
                 season?.let { append("&Season=$it") }
                 episode?.let { append("&Episode=$it") }
@@ -32,7 +34,7 @@ class SeriesAPIHandler {
 
     suspend fun searchSeries(query: String): String {
         return suspendCoroutine { continuation ->
-            val apiURL = "$API_BASE_URL&s=$query&type=series"
+            val apiURL = "$apiBaseURL&s=$query&type=series"
             APIService.fetch(
                 apiURL,
                 onSuccess = { response -> continuation.resume(response) },
