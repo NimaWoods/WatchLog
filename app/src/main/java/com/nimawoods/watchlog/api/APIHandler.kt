@@ -8,8 +8,8 @@ class APIHandler : AutoCloseable {
     private val apiBaseURL = "$API_BASE_URL/?$API_KEY"
 
     fun testConnection() {
-        APIService.fetch(apiBaseURL,
-            onSuccess = { response ->
+        APIService.fetch(apiBaseURL
+            , onSuccess = { response ->
                 println("API CONNECTED! Antwort: $response")
             }
             , onError = { error ->
@@ -20,7 +20,7 @@ class APIHandler : AutoCloseable {
 
     fun searchFilmAndSeries(title: String, onSuccess: (String) -> Unit, onError: (Throwable) -> Unit) {
         val apiURLCall = buildString {
-            append(API_BASE_URL)
+            append(apiBaseURL)
             append("&s=$title")
         }
 
